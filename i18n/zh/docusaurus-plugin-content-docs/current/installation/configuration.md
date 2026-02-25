@@ -1,6 +1,7 @@
 ---
-title: Configuration Options （配置选项）
+title: 配置选项
 ---
+# Configuration Options
 这页重点介绍了在首次设置 K3s 时常用的选项。有关更深入的内容，请参考 [高级选项和配置](../advanced.md) 以及 [server](../cli/server.md)￼和 [agent](../cli/agent.md)￼ 命令的文档。
 
 ## Configuration with install script （使用安装脚本配置）

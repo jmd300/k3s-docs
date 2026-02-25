@@ -1,8 +1,9 @@
 ---
-title: Private Registry Configuration（私有仓库配置）
+title: 私有仓库配置
 ---
-容器
-Containerd 可被设置链接私有仓库，并在kubelet需要的时候使用它们拉取镜像。
+# Private Registry Configuration
+
+容器Containerd 可被设置链接私有仓库，并在kubelet需要的时候使用它们拉取镜像。
 
 在启动时，K3s 会检查 `/etc/rancher/k3s/registries.yaml` 是否存在。如果存在，则在生成 containerd 配置时，会使用该文件中包含的仓库配置。
 
