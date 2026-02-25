@@ -25,8 +25,11 @@ $ docker run --rm -d --name k3s-docs -e HOME=$PWD -v $PWD:$PWD -w $PWD -u $(id -
 
 ### Build
 
-```
-$ yarn build
+```bash
+yarn build
+
+# 启动服务
+yarn serve
 ```
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
@@ -34,3 +37,9 @@ This command generates static content into the `build` directory and can be serv
 ### Deployment
 
 An automated GH action will deploy the website to GitHub Pages once a PR has been merged to `main`.
+
+
+### 启动汉语的开发环境
+```bash
+yarn start --locale zh
+```
