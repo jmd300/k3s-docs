@@ -10689,7 +10689,7 @@ __metadata:
     remark-cli: "npm:^12.0.1"
     remark-lint: "npm:^10.0.1"
     remark-lint-no-dead-urls: "npm:^2.0.1"
-    remark-validate-links: "npm:^13.0.1"
+    remark-validate-links: "npm:^13.1.0"
     remark-validate-links-heading-id: "npm:^0.0.3"
   languageName: unknown
   linkType: soft
@@ -14699,9 +14699,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"remark-validate-links@npm:^13.0.1":
-  version: 13.0.1
-  resolution: "remark-validate-links@npm:13.0.1"
+"remark-validate-links@npm:^13.1.0":
+  version: 13.1.0
+  resolution: "remark-validate-links@npm:13.1.0"
   dependencies:
     "@types/hosted-git-info": "npm:^3.0.0"
     "@types/mdast": "npm:^4.0.0"
@@ -14714,7 +14714,7 @@ __metadata:
     unified-engine: "npm:^11.0.0"
     unist-util-visit: "npm:^5.0.0"
     vfile: "npm:^6.0.0"
-  checksum: 10c0/344b52ed8e01da167e6aed4d3d7029a4f3aba3f21946c9155409e8032bca6c444852e7cc49274930ea9fc7dd39b1e52b6ec2912481ea6cd9c4b192600356cf7d
+  checksum: 10c0/550d2202622be2336801e481f9f6e478f8b7a8409f76bce307554672b7151218e65843c236b4af718a81800b400d7f1728040b36586f94ecec18bb5ff566ce83
   languageName: node
   linkType: hard
 
