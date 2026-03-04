@@ -10,7 +10,7 @@ title: "Installation"
 
 [内置镜像源](registry-mirror.md) 演示了如何启用内嵌的分布式镜像注册源镜像。
 
-[孤岛安装](airgap.md) 详细解释了如何在断网环境下设置 K3s。
+[离线安装](airgap.md) 详细解释了如何在断网环境下设置 K3s。
 
 [管理服务器角色](server-roles.md) 详述了如何配置 K3s （节点）为专职的 `control-plane` or `etcd` 服务器。
 

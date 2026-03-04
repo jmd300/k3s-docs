@@ -1,10 +1,11 @@
 ---
-title: "Managing Packaged Components"
+title: "管理预装组件"
 ---
+# Managing Packaged Components
 
-## Auto-Deploying Manifests (AddOns)
+## 自动部署清单 (AddOns)
 
-On server nodes, any file found in `/var/lib/rancher/k3s/server/manifests` will automatically be deployed to Kubernetes in a manner similar to `kubectl apply`, both on startup and when the file is changed on disk. Deleting files out of this directory will not delete the corresponding resources from the cluster.
+在 Server 节点上，位于 `/var/lib/rancher/k3s/server/manifests` 目录下的任何文件，都会在 K3s 启动时以及文件内容发生变化时，以类似于 `kubectl apply` 的方式自动部署到 Kubernetes 中。从该目录中删除文件并不会同步删除集群中对应的资源。
 
 Manifests are tracked as `AddOn` custom resources in the `kube-system` namespace. Any errors or warnings encountered when applying the manifest file may seen by using `kubectl describe` on the corresponding `AddOn`, or by using `kubectl get event -n kube-system` to view all events for that namespace, including those from the deploy controller.
 

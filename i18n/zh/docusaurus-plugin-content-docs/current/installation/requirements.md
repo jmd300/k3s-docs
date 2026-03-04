@@ -156,41 +156,41 @@ K3s 服务器需要所有节点都能访问 6443 端口。
 
 
 :::tip Important  
-The VXLAN port on nodes should not be exposed to the world as it opens up your cluster network to be accessed by anyone. Run your nodes behind a firewall/security group that disables access to port 8472.
+节点上的 VXLAN 端口不应暴露给互联网，否则会导致您的集群网络被任何人非法访问。请务必将节点部署在防火墙或安全组之后，并禁用针对 8472 端口的所有外部访问。
 :::
 
-:::danger
-Flannel relies on the [Bridge CNI plugin](https://www.cni.dev/plugins/current/main/bridge/) to create a L2 network that switches traffic. Rogue pods with `NET_RAW` capabilities can abuse that L2 network to launch attacks such as ARP spoofing. Therefore, as documented in the [Kubernetes docs](https://kubernetes.io/docs/concepts/security/pod-security-standards/), please set a restricted profile that disables `NET_RAW` on non-trustable pods.
+:::danger 
+
+Flannel 依赖 [Bridge CNI plugin](https://www.cni.dev/plugins/current/main/bridge/) 来创建一个进行流量交换的L2级别网络。
+
+具有 `NET_RAW` 权限的恶意 Pod 可以利用该二层（L2）网络发起诸如 ARP 欺骗之类的攻击。因此，正如 [Kubernetes docs](https://kubernetes.io/docs/concepts/security/pod-security-standards/) 中所记录的，请设置限制性策略（restricted profile），禁用非受信 Pod 的 `NET_RAW` 权限。
 :::
 
-### Inbound Rules for K3s Nodes
+### K3s 节点的入站规则
 
 | Protocol | Port      | Source    | Destination | Description
 |----------|-----------|-----------|-------------|------------
-| TCP      | 2379-2380 | Servers   | Servers     | Required only for HA with embedded etcd
+| TCP      | 2379-2380 | Servers   | Servers     | 仅在使用内置 etcd 的高可用（HA）架构时才需要
 | TCP      | 6443      | Agents    | Servers     | K3s supervisor and Kubernetes API Server
 | UDP      | 8472      | All nodes | All nodes   | Required only for Flannel VXLAN
 | TCP      | 10250     | All nodes | All nodes   | Kubelet metrics
-| UDP      | 51820     | All nodes | All nodes   | Required only for Flannel Wireguard with IPv4
-| UDP      | 51821     | All nodes | All nodes   | Required only for Flannel Wireguard with IPv6
-| TCP      | 5001      | All nodes | All nodes   | Required only for embedded distributed registry (Spegel)
-| TCP      | 6443      | All nodes | All nodes   | Required only for embedded distributed registry (Spegel)
+| UDP      | 51820     | All nodes | All nodes   | 仅在使用 IPv4 协议且开启 Flannel Wireguard 模式时才需要
+| UDP      | 51821     | All nodes | All nodes   | 仅在使用 IPv6 协议且开启 Flannel Wireguard 模式时才需要
+| TCP      | 5001      | All nodes | All nodes   | 仅在使用内置分布式镜像源时需要 (Spegel)
+| TCP      | 6443      | All nodes | All nodes   | 仅在使用内置分布式镜像源时需要 (Spegel)
 
-Typically, all outbound traffic is allowed.
-
-Additional changes to the firewall may be required depending on the OS used.
+通常情况下，所有的出站流量都是允许的。根据所使用的操作系统，可能还需要对防火墙进行额外的更改。
 
 ## Large Clusters
-
-Hardware requirements are based on the size of your K3s cluster. For production and large clusters, we recommend using a high-availability setup with an external database. The following options are recommended for the external database in production:
+硬件要求是基于k3s集群的规模的。对于生产环境和大集群，我们推荐使用外部数据库的高可用安装方式。
+生产环境下的外部数据库推荐使用以下选项：
 
 - MySQL
 - PostgreSQL
 - etcd
 
 ### CPU and Memory
-
-The following are the minimum CPU and memory requirements for nodes in a high-availability K3s server:
+以下是高可用性 K3s 服务器节点的最低 CPU 和内存要求：
 
 | Deployment Size |   Nodes   | vCPUs |  RAM  |
 |:---------------:|:---------:|:-----:|:-----:|
@@ -201,18 +201,17 @@ The following are the minimum CPU and memory requirements for nodes in a high-av
 |     XX-Large    |   500+    |   32  | 64 GB |
 
 ### Disks
-
-The cluster performance depends on database performance. To ensure optimal speed, we recommend always using SSD disks to back your K3s cluster. On cloud providers, you will also want to use the minimum size that allows the maximum IOPS.
+集群的性能取决于数据库的性能。为了确保最佳速度，我们建议始终使用 SSD 硬盘来支持您的 K3s 集群。在云服务提供商上，您还需要使用允许最大 IOPS 的最小磁盘大小。
 
 ### Network
 
-You should consider increasing the subnet size for the cluster CIDR so that you don't run out of IPs for the pods. You can do that by passing the `--cluster-cidr` option to K3s server upon starting.
+您应该考虑增加集群 CIDR 的子网大小，以避免 pod 的 IP 用尽。可以通过在启动 K3s 服务器时传递 `--cluster-cidr` 选项来实现。
 
 ### Database
 
-K3s supports different databases including MySQL, PostgreSQL, MariaDB, and etcd.  See [Cluster Datastore](../datastore/datastore.md) for more info.
+K3s 支持多种数据库，包括 MySQL, PostgreSQL, MariaDB, and etcd.  更多信息看 [Cluster Datastore](../datastore/datastore.md).
 
-The following is a sizing guide for the database resources you need to run large clusters:
+以下是运行大型集群所需数据库资源的大小指南：
 
 | Deployment Size |   Nodes   | vCPUs |  RAM  |
 |:---------------:|:---------:|:-----:|:-----:|
